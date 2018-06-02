@@ -1,10 +1,11 @@
 <?php
 error_reporting(E_ALL);
-ini_set('display_errors', 'On');
+session_start();
 include('connection.php');
 
+$id = $_SESSION['id'];
 $mID= $_GET["mID"];
-$conn->query("DELETE FROM `mer_order` WHERE item_id = $mID AND user_id = 1");
+$conn->query("DELETE FROM `mer_order` WHERE item_id = $mID AND user_id = $id");
 
 header("location: cart.php");
 exit();

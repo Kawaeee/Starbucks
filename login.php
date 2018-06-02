@@ -1,16 +1,7 @@
 <?php
 error_reporting(0);
-session_start();
+ini_set('display_errors', 'On');
 include('connection.php');
-
-$id = $_SESSION['id'];
-$strSQL    = "SELECT * FROM mer_user WHERE id  = $id";
-$objQuery  = mysqli_query($conn, $strSQL);
-$objResult = mysqli_fetch_array($objQuery, MYSQLI_ASSOC);
-
-$colsql = "SELECT * FROM mer_stock WHERE collection = 'christmas' ";
-$colquery = mysqli_query($conn,$colsql);
-
 ?>
  
  <html>
@@ -101,56 +92,29 @@ $colquery = mysqli_query($conn,$colsql);
   </div>
 </nav>
 
-<div  style="margin-top:-2%; margin-left:0%" class="container"> 
-
-<div class="page-header" Style="margin-left:5%; margin-right:5%;" >
-    <h3><b>Gift & Merchandise : </b>Christmas Collection</h3> 
-</div>   
-
-
-<ul class="showInColumn2">
-  
-  <?php while($obj = mysqli_fetch_array($colquery)) {
-  
-  ?>
-     
-    <li>
-    <div class="panel panel-default">
-      <div class="panel-heading"><?php echo $obj['name']?></div>
-
-      <div class="panel-body">
-        <div style="text-align:center;">
-          <img src=<?php echo "./img/".$obj['image'] ?> style="width:50%;"  width="150" height="150" alt="Image">
-          <br>
-        </div>
-        Description : <?php echo $obj['description']?>
-      </div>
-
-      <div class="panel-footer"><?php echo $obj["price"]." USD" ?>
-      <ul class="nav navbar-nav navbar-right">
-      <form method="POST" action="./addtocart.php?mID=<?php echo $obj["mID"]?>">
-      <button class="btn btn-link" type="submit" value="Add to Cart" onclick ="alert('Added <?php echo $obj["name"]?> to your cart.')">
-          <div style="margin-top:-7%">
-            <span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;Add to cart
-          </div>
-      </button>
-      </form>
-      </ul>
-    </div>
-
-    </div>
-    </li>
-
-    <?php
-    }
-    ?>
-
-</ul>
-
-</div>
-
-<br>
-
+<br><br>
+<div align="center">
+ <div style="width:50%;text-align:center;">
+ <form method="POST" action="./checklogin.php">
+  <div class="form-group">
+    <label for="usr">Username</label>
+    <input type="text" class="form-control" id="usr" name="usr">
+  </div>
+  <div class="form-group">
+    <label for="pwd">Password</label>
+    <input type="password" class="form-control" id="pwd" name="pwd">
+  </div>
+  <div class="checkbox">
+    <label><input type="checkbox"> Remember me</label>
+  </div>
+  <br>
+  <button type="submit" class="btn btn-default">Submit</button>
+</form>
+ </div>
+ <br>
+ </div>
+ 
+ 
  <div class = "footer">
  <footer class ="footer" style="background-color:#f0f0f0 ;">
   <div class="col-sm-2" style="margin-left:5%; margin-top:3%"> 
@@ -210,8 +174,3 @@ $colquery = mysqli_query($conn,$colsql);
 
 </body>
 </html>
-
-<?php
-$colquery->close();
-$conn->close();
-?>

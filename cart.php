@@ -1,30 +1,30 @@
 <?php
-error_reporting(E_ALL);
+error_reporting(0);
 ini_set('display_errors', 'On');
 include('connection.php');
 
+session_start();
+$id = $_SESSION['id'];
+$strSQL    = "SELECT * FROM mer_user WHERE id  = $id";
+$objQuery  = mysqli_query($conn, $strSQL);
+$objResult = mysqli_fetch_array($objQuery, MYSQLI_ASSOC);
 
-$sql = "SELECT * FROM `mer_order`,`mer_stock` WHERE user_id = 1 AND item_id = mID";
+$sql = "SELECT * FROM `mer_order`,`mer_stock` WHERE user_id = $id AND item_id = mID";
 $query = mysqli_query($conn,$sql);
 ?>
  
-<html>
+ <html>
   <title>Fake Starbucks Coffee</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">                    
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <link rel="icon" href="img/icon.png" type="image/png" sizes="16x16">
+  <link rel="icon" href="./img/icon.png" type="image/png" sizes="16x16">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Barlow">
   <link rel="stylesheet" type="text/css" href="./css/stemp.css">
 
-<style>
-
-</style>
-
 <body  style="font-family: 'Barlow', sans-serif;">
-
 
 <nav class="navbar navbar-default">
   <div style="min-height: 10px;background: #006341;"></div>
@@ -33,8 +33,8 @@ $query = mysqli_query($conn,$sql);
   <br>
 
   <div class="navbar-header">
-    <form action="index.php">
-    <input style="margin-left:40%"  type="image" src="img/icon.png" alt="Submit" width="60" height="60">
+    <form action="./index.php">
+    <input style="margin-left:40%"  type="image" src="./img/icon.png" alt="Submit" width="60" height="60">
     </form> 
     
     </div> 
@@ -48,32 +48,32 @@ $query = mysqli_query($conn,$sql);
         <ul class="showInColumn">
 
           <li><a href="#" style="color:black">
-              <img src="img/ABC.png" alt="ABC Collection" style="width:50;height:50;" class="img-responsive center-block">
+              <img src="./img/ABC.png" alt="ABC Collection" style="width:50;height:50;" class="img-responsive center-block">
               ABC Collection
           </a></li>
 
           <li><a href="#" style="color:black">
-              <img src="img/Banana.png" alt="Banana Collection" style="width:50;height:50;" class="img-responsive center-block">
+              <img src="./img/Banana.png" alt="Banana Collection" style="width:50;height:50;" class="img-responsive center-block">
               Banana Collection
           </a></li>
 
           <li><a href="#" style="color:black">
-              <img src="img/Harvey.png" alt="Harvey Collection" style="width:50;height:50;" class="img-responsive center-block">
+              <img src="./img/Harvey.png" alt="Harvey Collection" style="width:50;height:50;" class="img-responsive center-block">
               Harvey the Collection
           </a></li>
 
-          <li><a href="col_christmas.php" style="color:black">
-              <img src="img/Christmas.png" alt="Christmas Collection" style="width:50;height:50;" class="img-responsive center-block">
+          <li><a href="./col_christmas.php" style="color:black">
+              <img src="./img/Christmas.png" alt="Christmas Collection" style="width:50;height:50;" class="img-responsive center-block">
               Christmas Collection
           </a></li>
 
-          <li><a href="col_valentine.php" style="color:black">
-              <img src="img/Valentine.png" alt="Valentine Collection" style="width:50;height:50;" class="img-responsive center-block">
+          <li><a href="./col_valentine.php" style="color:black">
+              <img src="./img/Valentine.png" alt="Valentine Collection" style="width:50;height:50;" class="img-responsive center-block">
               Valentine Collection
           </a></li>
 
           <li><a href="#" style="color:black">
-              <img src="img/Harvey.png" alt="-- Collection" style="width:50;height:50;" class="img-responsive center-block">
+              <img src="./img/Harvey.png" alt="-- Collection" style="width:50;height:50;" class="img-responsive center-block">
               Peerapat Collection
           </a></li>
         </ul>
@@ -89,14 +89,19 @@ $query = mysqli_query($conn,$sql);
       <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
     </form>
     <ul  style="margin-top:-1%" class="nav navbar-nav navbar-right">
-      <li><a href="cart.php"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
-      <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-      <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      <li><a href="./cart.php"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp; Cart</a></li>
+      <li><a href="#"><span class="glyphicon glyphicon-user"></span>&nbsp; Sign Up</a></li>
+      <?php if($id==null){ ?> 
+        <li><a href="./login.php"><span class="glyphicon glyphicon-log-in"></span>&nbsp;  Login</a></li>
+      <?php }else { ?>
+        <li><a href="./logout.php"><span class="glyphicon glyphicon-log-in"></span>&nbsp; <?php echo $objResult["username"];?></a></li>
+      <?php } ?>
     </ul>
-
+    
   </div>
 </nav>
 
+<br>
 <div class="container" style="padding-right:10%">        
   <table class="table" style="margin-left:5%; margin-right:10%">
     <thead> 
@@ -120,7 +125,7 @@ $query = mysqli_query($conn,$sql);
         <td></td>
         <td style="text-align:center;"><?php echo $obj['amount']?></td>
         <td style="text-align:center;"><?php echo $obj['price']?> USD</td>
-        <form method="POST" action="delete.php?mID=<?php echo $obj["mID"]?>">
+        <form method="POST" action="./delete.php?mID=<?php echo $obj["mID"]?>">
         <td style="text-align:center;">
               <button class="btn btn-danger" type="submit" value="delete" onclick ="alert('Deleted <?php echo $obj["name"]?> from your cart.')">
               <div style="margin-top:-7%">
@@ -150,20 +155,21 @@ $query = mysqli_query($conn,$sql);
       </tr>
     </tbody>
   </table>
-  <form method="get" action="index.php">
-  <button type="submit" class="btn btn-danger" style="float: left; margin-left: 75%"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;&nbsp; Continue Shopping</button>
-  </form>
-  <form method="get" action="checkout.php">
-  <button type="submit" class="btn btn-success" style="float: right; margin-right:-5%"><span class="glyphicon glyphicon-bitcoin"></span>&nbsp;&nbsp; Proceed to Checkout</button>
-  </form>
-  <br><br><br>
+  
+  <br><br><br><br>
+  <div style="float:right;">
+    <a href="./index.php" class="btn btn-danger"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;&nbsp; Continue Shopping</a>
+    &nbsp;&nbsp;&nbsp;
+    <a href="./checkout.php" class="btn btn-success"><span class="glyphicon glyphicon-bitcoin"></span>&nbsp;&nbsp; Proceed to Checkout</a>
+  </div>
+
 </div>
 
 
 <br><br><br>
  
 <div class = "footer">
-<footer class ="footer" style="background-color:#f0f0f0 ;">
+ <footer class ="footer" style="background-color:#f0f0f0 ;">
   <div class="col-sm-2" style="margin-left:5%; margin-top:3%"> 
     <h5><b>ABOUT US</b></h5>
     <p>Our Company
@@ -213,9 +219,8 @@ $query = mysqli_query($conn,$sql);
   </div>
 
   <div class="col-sm-1" style="text-align:right;margin-top:2%;"> 
-    <img  src="img/starbuck.png" width="40" height="160" >
+    <img  src="./img/starbuck.png" width="40" height="160" >
   </div>
-
 
 </footer>
 </div>

@@ -1,26 +1,26 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 'On');
+error_reporting(0);
+session_start();
 include('connection.php');
+
+$id = $_SESSION['id'];
+$strSQL    = "SELECT * FROM mer_user WHERE id  = $id";
+$objQuery  = mysqli_query($conn, $strSQL);
+$objResult = mysqli_fetch_array($objQuery, MYSQLI_ASSOC);
 ?>
  
-<html>
+ <html>
   <title>Fake Starbucks Coffee</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">                    
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <link rel="icon" href="img/icon.png" type="image/png" sizes="16x16">
+  <link rel="icon" href="./img/icon.png" type="image/png" sizes="16x16">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Barlow">
   <link rel="stylesheet" type="text/css" href="./css/stemp.css">
 
-<style>
-
-</style>
-
 <body  style="font-family: 'Barlow', sans-serif;">
-
 
 <nav class="navbar navbar-default">
   <div style="min-height: 10px;background: #006341;"></div>
@@ -29,8 +29,8 @@ include('connection.php');
   <br>
 
   <div class="navbar-header">
-    <form action="index.php">
-    <input style="margin-left:40%"  type="image" src="img/icon.png" alt="Submit" width="60" height="60">
+    <form action="./index.php">
+    <input style="margin-left:40%"  type="image" src="./img/icon.png" alt="Submit" width="60" height="60">
     </form> 
     
     </div> 
@@ -44,32 +44,32 @@ include('connection.php');
         <ul class="showInColumn">
 
           <li><a href="#" style="color:black">
-              <img src="img/ABC.png" alt="ABC Collection" style="width:50;height:50;" class="img-responsive center-block">
+              <img src="./img/ABC.png" alt="ABC Collection" style="width:50;height:50;" class="img-responsive center-block">
               ABC Collection
           </a></li>
 
           <li><a href="#" style="color:black">
-              <img src="img/Banana.png" alt="Banana Collection" style="width:50;height:50;" class="img-responsive center-block">
+              <img src="./img/Banana.png" alt="Banana Collection" style="width:50;height:50;" class="img-responsive center-block">
               Banana Collection
           </a></li>
 
           <li><a href="#" style="color:black">
-              <img src="img/Harvey.png" alt="Harvey Collection" style="width:50;height:50;" class="img-responsive center-block">
+              <img src="./img/Harvey.png" alt="Harvey Collection" style="width:50;height:50;" class="img-responsive center-block">
               Harvey the Collection
           </a></li>
 
-          <li><a href="col_christmas.php" style="color:black">
-              <img src="img/Christmas.png" alt="Christmas Collection" style="width:50;height:50;" class="img-responsive center-block">
+          <li><a href="./col_christmas.php" style="color:black">
+              <img src="./img/Christmas.png" alt="Christmas Collection" style="width:50;height:50;" class="img-responsive center-block">
               Christmas Collection
           </a></li>
 
-          <li><a href="col_valentine.php" style="color:black">
-              <img src="img/Valentine.png" alt="Valentine Collection" style="width:50;height:50;" class="img-responsive center-block">
+          <li><a href="./col_valentine.php" style="color:black">
+              <img src="./img/Valentine.png" alt="Valentine Collection" style="width:50;height:50;" class="img-responsive center-block">
               Valentine Collection
           </a></li>
 
           <li><a href="#" style="color:black">
-              <img src="img/Harvey.png" alt="-- Collection" style="width:50;height:50;" class="img-responsive center-block">
+              <img src="./img/Harvey.png" alt="-- Collection" style="width:50;height:50;" class="img-responsive center-block">
               Peerapat Collection
           </a></li>
         </ul>
@@ -85,17 +85,21 @@ include('connection.php');
       <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
     </form>
     <ul  style="margin-top:-1%" class="nav navbar-nav navbar-right">
-      <li><a href="cart.php"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
-      <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-      <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      <li><a href="./cart.php"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp; Cart</a></li>
+      <li><a href="#"><span class="glyphicon glyphicon-user"></span>&nbsp; Sign Up</a></li>
+      <?php if($id==null){ ?> 
+        <li><a href="./login.php"><span class="glyphicon glyphicon-log-in"></span>&nbsp;  Login</a></li>
+      <?php }else { ?>
+        <li><a href="./logout.php"><span class="glyphicon glyphicon-log-in"></span>&nbsp; <?php echo $objResult["username"];?></a></li>
+      <?php } ?>
     </ul>
 
   </div>
 </nav>
 
  <div style="width:100%;text-align:center;">
-  <img src="img/index1.jpg" style="margin-top:-2%;">
-  <img src="img/index2.jpg" style="margin-top:-2%;">
+  <img src="./img/index1.jpg" style="margin-top:-2%;">
+  <img src="./img/index2.jpg" style="margin-top:-2%;">
  </div>
  
  
@@ -150,7 +154,7 @@ include('connection.php');
   </div>
 
   <div class="col-sm-1" style="text-align:right;margin-top:2%;"> 
-    <img  src="img/starbuck.png" width="40" height="160" >
+    <img  src="./img/starbuck.png" width="40" height="160" >
   </div>
 
 </footer>
