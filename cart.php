@@ -2,6 +2,10 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 'On');
 include('connection.php');
+
+
+$sql = "SELECT * FROM `mer_order`,`mer_stock` WHERE user_id = 1 AND item_id = mID";
+$query = mysqli_query($conn,$sql);
 ?>
  
 <html>
@@ -93,14 +97,73 @@ include('connection.php');
   </div>
 </nav>
 
- <div style="width:100%;text-align:center;">
-  <img src="img/index1.jpg" style="margin-top:-2%;">
-  <img src="img/index2.jpg" style="margin-top:-2%;">
- </div>
+<div class="container" style="padding-right:10%">        
+  <table class="table" style="margin-left:5%; margin-right:10%">
+    <thead> 
+      <tr>
+        <th>Product Description</th>
+        <th></th>
+        <th></th>
+        <th style="text-align:center;">Quanitity</th>
+        <th style="text-align:center;">Price</th>
+        <th style="text-align:center;">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+
+    <?php while($obj = mysqli_fetch_array($query)) {
+  
+    ?>
+      <tr>
+        <td><?php echo $obj['name']?></td>
+        <td></td>
+        <td></td>
+        <td style="text-align:center;"><?php echo $obj['amount']?></td>
+        <td style="text-align:center;"><?php echo $obj['price']?> USD</td>
+        <form method="POST" action="delete.php?mID=<?php echo $obj["mID"]?>">
+        <td style="text-align:center;">
+              <button class="btn btn-danger" type="submit" value="delete" onclick ="alert('Deleted <?php echo $obj["name"]?> from your cart.')">
+              <div style="margin-top:-7%">
+              <span class="glyphicon glyphicon-remove-sign"></span>&nbsp;&nbsp;Remove
+             </div>
+          </button>
+              <td>
+              </form>
+      </tr>
+
+      <?php
+           }
+      ?>
+
+      <tr>
+        <td><h4>Total</h4></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td style="text-align:center;"> 
+        <?php
+          //$query = "SELECT SUM(price) as total_price FROM OrderMerchandiseOnline";
+          //$sum = mysqli_fetch_row(mysqli_query($conn, $query));
+          //echo $sum[0]." USD"; 
+        ?>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <form method="get" action="index.php">
+  <button type="submit" class="btn btn-danger" style="float: left; margin-left: 75%"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;&nbsp; Continue Shopping</button>
+  </form>
+  <form method="get" action="checkout.php">
+  <button type="submit" class="btn btn-success" style="float: right; margin-right:-5%"><span class="glyphicon glyphicon-bitcoin"></span>&nbsp;&nbsp; Proceed to Checkout</button>
+  </form>
+  <br><br><br>
+</div>
+
+
+<br><br><br>
  
- 
- <div class = "footer">
- <footer class ="footer" style="background-color:#f0f0f0 ;">
+<div class = "footer">
+<footer class ="footer" style="background-color:#f0f0f0 ;">
   <div class="col-sm-2" style="margin-left:5%; margin-top:3%"> 
     <h5><b>ABOUT US</b></h5>
     <p>Our Company
@@ -152,6 +215,7 @@ include('connection.php');
   <div class="col-sm-1" style="text-align:right;margin-top:2%;"> 
     <img  src="img/starbuck.png" width="40" height="160" >
   </div>
+
 
 </footer>
 </div>

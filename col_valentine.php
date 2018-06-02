@@ -17,67 +17,11 @@ $colquery = mysqli_query($conn,$colsql);
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <link rel="icon" href="img/icon.png" type="image/png" sizes="16x16">
-  <link href="https://fonts.googleapis.com/css?family=Barlow" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Barlow">
+  <link rel="stylesheet" type="text/css" href="./css/stemp.css">
 
 <style>
-ul.dropdown-menu>li {
-    text-align: center;
-  } 
-ul.showInColumn{
-    display:block;float:left;
-    list-style:none;
-    padding:0;margin:0;
-    width:470px; 
-    padding:2px 0 2px 2px;
-}
-ul.showInColumn li{
-    list-style:none;
-    display:block;float:left;
-    text-align:center;
-    width:150px;
-}
-ul.showInColumn2{
-    display:block;float:left;
-    list-style:none;
-    padding:0;margin:0;
-    width:1200px; 
-    padding:2px 0 2px 2px;
-}
-ul.showInColumn2 li{
-    margin-left:8%;
-    list-style:none;
-    display:block;float:left;
-    width:300px;
-}
-.container {
-    width: 100%;
-    max-width: 1360px;
-    margin: 0 auto;
-    padding: 0 10px;
-    box-sizing: border-box;
-}
-.column {
-    box-sizing: border-box;
-    position: relative;
-    display: inline-block;
-    width: 100%;
-    padding: 0 10px;
-    vertical-align: top;
-    font-family: Lato,Helvetica,Arial,sans-serif;
-}
-.footer {
-  position: absolute;
-  bottom:absolute;
-  padding: 0;
-  padding-bottom:3%;
-  border-bottom: 20px;
-  margin-right:0%;
-  width:100%;
-  min-height: 190px;
-  background: #f7f7f7;
-  color: #382f2d;
-  font-size: 1em;
-}
+
 </style>
 
 <body style="font-family: 'Barlow', sans-serif;">
@@ -103,32 +47,32 @@ ul.showInColumn2 li{
         <ul class="showInColumn">
 
           <li><a href="#" style="color:black">
-              <img src="img/ABC.png" alt="ABC Collection" style="width:50;height:50" class="img-responsive center-block">
+              <img src="img/ABC.png" alt="ABC Collection" style="width:50;height:50;" class="img-responsive center-block">
               ABC Collection
           </a></li>
 
           <li><a href="#" style="color:black">
-              <img src="img/Banana.png" alt="Banana Collection" style="width:50;height:50" class="img-responsive center-block">
+              <img src="img/Banana.png" alt="Banana Collection" style="width:50;height:50;" class="img-responsive center-block">
               Banana Collection
           </a></li>
 
           <li><a href="#" style="color:black">
-              <img src="img/Harvey.png" alt="Harvey Collection" style="width:50;height:50" class="img-responsive center-block">
+              <img src="img/Harvey.png" alt="Harvey Collection" style="width:50;height:50;" class="img-responsive center-block">
               Harvey the Collection
           </a></li>
 
           <li><a href="col_christmas.php" style="color:black">
-              <img src="img/Christmas.png" alt="Christmas Collection" style="width:50;height:50" class="img-responsive center-block">
+              <img src="img/Christmas.png" alt="Christmas Collection" style="width:50;height:50;" class="img-responsive center-block">
               Christmas Collection
           </a></li>
 
           <li><a href="col_valentine.php" style="color:black">
-              <img src="img/Valentine.png" alt="Valentine Collection" style="width:50;height:50" class="img-responsive center-block">
+              <img src="img/Valentine.png" alt="Valentine Collection" style="width:50;height:50;" class="img-responsive center-block">
               Valentine Collection
           </a></li>
 
           <li><a href="#" style="color:black">
-              <img src="img/Peerapat.png" alt="Peerapat Collection" style="width:50;height:50" class="img-responsive center-block">
+              <img src="img/Peerapat.png" alt="Peerapat Collection" style="width:50;height:50;" class="img-responsive center-block">
               Peerapat Collection
           </a></li>
 
