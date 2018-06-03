@@ -5,7 +5,7 @@ include('connection.php');
 
 $id = $_SESSION['id'];
 $mID= $_GET["mID"];
-$conn->query("DELETE FROM `mer_order` WHERE item_id = $mID AND user_id = $id");
+$conn->query("DELETE FROM `mer_order` WHERE item_id = $mID AND user_id = $id LIMIT 1");
 
 header("location: cart.php");
 exit();

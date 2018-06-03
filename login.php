@@ -64,7 +64,7 @@ include('connection.php');
           </a></li>
 
           <li><a href="#" style="color:black">
-              <img src="./img/Harvey.png" alt="-- Collection" style="width:50;height:50;" class="img-responsive center-block">
+              <img src="./img/Peerapat.png" alt="Peerapat Collection" style="width:50;height:50;" class="img-responsive center-block">
               Peerapat Collection
           </a></li>
         </ul>

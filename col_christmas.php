@@ -30,6 +30,7 @@ $colquery = mysqli_query($conn,$colsql);
   <div style="min-height: 10px;background: #006341;"></div>
 
   <div class="container-fluid">
+
   <br>
 
   <div class="navbar-header">
@@ -73,7 +74,7 @@ $colquery = mysqli_query($conn,$colsql);
           </a></li>
 
           <li><a href="#" style="color:black">
-              <img src="./img/Harvey.png" alt="-- Collection" style="width:50;height:50;" class="img-responsive center-block">
+              <img src="./img/Peerapat.png" alt="Peerapat Collection" style="width:50;height:50;" class="img-responsive center-block">
               Peerapat Collection
           </a></li>
         </ul>

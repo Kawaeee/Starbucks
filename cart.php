@@ -9,7 +9,7 @@ $strSQL    = "SELECT * FROM mer_user WHERE id  = $id";
 $objQuery  = mysqli_query($conn, $strSQL);
 $objResult = mysqli_fetch_array($objQuery, MYSQLI_ASSOC);
 
-$sql = "SELECT * FROM `mer_order`,`mer_stock` WHERE user_id = $id AND item_id = mID";
+$sql = "SELECT *,mer_order.amount as or_amount FROM `mer_order`,`mer_stock` WHERE user_id = $id AND item_id = mID";
 $query = mysqli_query($conn,$sql);
 ?>
  
@@ -30,14 +30,14 @@ $query = mysqli_query($conn,$sql);
   <div style="min-height: 10px;background: #006341;"></div>
 
   <div class="container-fluid">
+
   <br>
 
   <div class="navbar-header">
     <form action="./index.php">
     <input style="margin-left:40%"  type="image" src="./img/icon.png" alt="Submit" width="60" height="60">
-    </form> 
-    
-    </div> 
+    </form>   
+  </div> 
     
 
     <ul  style="margin-left:4%;margin-top:2%" class="nav navbar-nav">
@@ -73,7 +73,7 @@ $query = mysqli_query($conn,$sql);
           </a></li>
 
           <li><a href="#" style="color:black">
-              <img src="./img/Harvey.png" alt="-- Collection" style="width:50;height:50;" class="img-responsive center-block">
+              <img src="./img/Peerapat.png" alt="Peerapat Collection" style="width:50;height:50;" class="img-responsive center-block">
               Peerapat Collection
           </a></li>
         </ul>
@@ -102,13 +102,13 @@ $query = mysqli_query($conn,$sql);
 </nav>
 
 <br>
-<div class="container" style="padding-right:10%">        
-  <table class="table" style="margin-left:5%; margin-right:10%">
+
+<div class="container" style="width:80%; margin-left:140px;" > 
+
+  <table class="table table-hover">
     <thead> 
       <tr>
         <th>Product Description</th>
-        <th></th>
-        <th></th>
         <th style="text-align:center;">Quanitity</th>
         <th style="text-align:center;">Price</th>
         <th style="text-align:center;">Action</th>
@@ -121,19 +121,13 @@ $query = mysqli_query($conn,$sql);
     ?>
       <tr>
         <td><?php echo $obj['name']?></td>
-        <td></td>
-        <td></td>
-        <td style="text-align:center;"><?php echo $obj['amount']?></td>
+        <td style="text-align:center;"><?php echo $obj['or_amount']?></td>
         <td style="text-align:center;"><?php echo $obj['price']?> USD</td>
         <form method="POST" action="./delete.php?mID=<?php echo $obj["mID"]?>">
-        <td style="text-align:center;">
-              <button class="btn btn-danger" type="submit" value="delete" onclick ="alert('Deleted <?php echo $obj["name"]?> from your cart.')">
-              <div style="margin-top:-7%">
-              <span class="glyphicon glyphicon-remove-sign"></span>&nbsp;&nbsp;Remove
-             </div>
-          </button>
-              <td>
-              </form>
+        <td style="text-align:center; height: 10%;">
+        <button type = "submit" style="" class="btn btn-danger" value="delete" onclick ="alert('Deleted <?php echo $obj["name"]?> from your cart.')"><span class="glyphicon glyphicon-remove-sign"></span>&nbsp;&nbsp;Remove</button>
+        </td>
+        </form>
       </tr>
 
       <?php
@@ -143,15 +137,14 @@ $query = mysqli_query($conn,$sql);
       <tr>
         <td><h4>Total</h4></td>
         <td></td>
-        <td></td>
-        <td></td>
         <td style="text-align:center;"> 
         <?php
-          //$query = "SELECT SUM(price) as total_price FROM OrderMerchandiseOnline";
-          //$sum = mysqli_fetch_row(mysqli_query($conn, $query));
-          //echo $sum[0]." USD"; 
+          $sum = "SELECT SUM(mer_stock.price) as total FROM mer_order,mer_user,mer_stock WHERE mer_user.id  = $id AND mer_stock.mID = mer_order.item_id";
+          $sumObj = mysqli_fetch_row(mysqli_query($conn, $sum));
+          echo $sumObj[0]." USD"; 
         ?>
         </td>
+        <td></td>
       </tr>
     </tbody>
   </table>
@@ -165,11 +158,11 @@ $query = mysqli_query($conn,$sql);
 
 </div>
 
-
 <br><br><br>
  
 <div class = "footer">
- <footer class ="footer" style="background-color:#f0f0f0 ;">
+ <footer class ="footer" style="background-color:#f0f0f0;">
+
   <div class="col-sm-2" style="margin-left:5%; margin-top:3%"> 
     <h5><b>ABOUT US</b></h5>
     <p>Our Company
