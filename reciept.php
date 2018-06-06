@@ -1,17 +1,24 @@
 <?php
 error_reporting(0);
 ini_set('display_errors', 'On');
-include('connection.php');
 session_start();
+include('connection.php');
 
 $id = $_SESSION['id'];
+
+if ($_SESSION['id'] == "") {
+  echo "<script>alert('Login before using this site. Thank you!!')</script>";
+  echo "<script>window.location='./login.php';</script>";
+}
 
 $strSQL    = "SELECT * FROM mer_user WHERE id  = $id";
 $objQuery  = mysqli_query($conn, $strSQL);
 $objResult = mysqli_fetch_array($objQuery, MYSQLI_ASSOC);
 
-$sql = "SELECT *,mer_order.amount as or_amount FROM `mer_order`,`mer_stock` WHERE user_id = $id AND item_id = mID AND status = 1";
+$sql = "SELECT * FROM `mer_data` WHERE id = $id";
 $query = mysqli_query($conn,$sql);
+$res = mysqli_fetch_array($query, MYSQLI_ASSOC);
+
 ?>
  
  <html>
@@ -21,24 +28,65 @@ $query = mysqli_query($conn,$sql);
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">                    
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="icon" href="./img/icon.png" type="image/png" sizes="16x16">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Barlow">
   <link rel="stylesheet" type="text/css" href="./css/stemp.css">
+<style>
 
+.row {
+  display: -ms-flexbox; /* IE10 */
+  display: flex;
+  -ms-flex-wrap: wrap; /* IE10 */
+  flex-wrap: wrap;
+  margin: 0 -16px;
+}
+
+.col-25 {
+  -ms-flex: 25%; /* IE10 */
+  flex: 25%;
+}
+
+.col-50 {
+  -ms-flex: 50%; /* IE10 */
+  flex: 50%;
+}
+
+.col-75 {
+  -ms-flex: 75%; /* IE10 */
+  flex: 75%;
+}
+
+.col-25,
+.col-50,
+.col-75 {
+  padding: 0 16px;
+}
+
+.container {
+  background-color: #f2f2f2;
+  padding: 5px 20px 15px 20px;
+  border: 1px solid lightgrey;
+  border-radius: 3px;
+}
+p.test{
+    padding-left: 50px;
+}
+</style>
 <body  style="font-family: 'Barlow', sans-serif;">
 
 <nav class="navbar navbar-default">
   <div style="min-height: 10px;background: #006341;"></div>
 
   <div class="container-fluid">
-
   <br>
 
   <div class="navbar-header">
     <form action="./index.php">
     <input style="margin-left:40%"  type="image" src="./img/icon.png" alt="Submit" width="60" height="60">
-    </form>   
-  </div> 
+    </form> 
+    
+    </div> 
     
 
     <ul  style="margin-left:4%;margin-top:2%" class="nav navbar-nav">
@@ -98,72 +146,55 @@ $query = mysqli_query($conn,$sql);
         <li><a href="./logout.php"><span class="glyphicon glyphicon-log-in"></span>&nbsp; <?php echo $objResult["username"];?></a></li>
       <?php } ?>
     </ul>
-    
   </div>
 </nav>
 
-<br>
+<div align="center">
+<div class="reciept" style="border-style: inset; width:60%;">
+  <input style="float:right;"  type="image" src="./img/icon.png" alt="Submit" width="60" height="60">
+  <br><p align="right" style="padding-right:70px;"class="test">Fake Starbuck Coffee</p>
+  <h1>Reciept</h1>
+  <br>
+  <p align="left" class="test"><?php echo $res["fullname"];?></p>  
+  <p align="left" class="test"><?php echo $res["email"];?></p> 
+  <p align="left" class="test"><?php echo $res["address"]; echo "\t"; echo $res["city"]; echo "\t"; echo $res["state"]; echo "\t"; echo $res["zip"];?></p>
 
-<div class="container" style="width:80%; margin-left:140px;" > 
-
-  <table class="table table-hover">
-    <thead> 
-      <tr>
-        <th>Product Description</th>
-        <th style="text-align:center;">Quanitity</th>
-        <th style="text-align:center;">Price</th>
-        <th style="text-align:center;">Action</th>
-      </tr>
-    </thead>
-    <tbody>
-
-    <?php while($obj = mysqli_fetch_array($query)) {
-  
-    ?>
-      <tr>
-        <td><?php echo $obj['name']?></td>
-        <td style="text-align:center;"><?php echo $obj['or_amount']?></td>
-        <td style="text-align:center;"><?php echo $obj['price']?> USD</td>
-        <form method="POST" action="./delete.php?mID=<?php echo $obj["mID"]?>">
-        <td style="text-align:center; height: 10%;">
-        <button type = "submit" style="" class="btn btn-danger" value="delete" onclick ="alert('Deleted <?php echo $obj["name"]?> from your cart.')"><span class="glyphicon glyphicon-remove-sign"></span>&nbsp;&nbsp;Remove</button>
-        </td>
-        </form>
-      </tr>
-
-      <?php
-           }
-      ?>
-
-      <tr>
-        <td><h4>Total</h4></td>
-        <td></td>
-        <td style="text-align:center;"> 
-        <?php
-          $sum = "SELECT SUM(mer_stock.price) as total FROM mer_order,mer_user,mer_stock WHERE mer_user.id  = $id AND mer_stock.mID = mer_order.item_id AND status = 1";
-          $sumObj = mysqli_fetch_row(mysqli_query($conn, $sum));
-          echo $sumObj[0]." USD"; 
-        ?>
-        </td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  <br><br><br><br>
-  <div style="float:right;">
-    <a href="./index.php" class="btn btn-danger"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;&nbsp; Continue Shopping</a>
-    &nbsp;&nbsp;&nbsp;
-    <a href="./checkout.php" class="btn btn-success"><span class="glyphicon glyphicon-bitcoin"></span>&nbsp;&nbsp; Proceed to Checkout</a>
-  </div>
+<table class="table table-hover">
+  <thead> 
+    <tr>
+      <th>Product Description</th>
+      <th style="text-align:center;">Quanitity</th>
+      <th style="text-align:center;">Price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><?php echo $obj['name']?></td>
+      <td style="text-align:center;"><?php echo $obj['or_amount']?></td>
+      <td style="text-align:center;"><?php echo $obj['price']?> USD</td>
+    </tr>
+  </tbody>
+</table>
+<p align="left" style="padding-left:20px;">Total&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+USD</p>
 
 </div>
 
-<br><br><br>
- 
-<div class = "footer">
- <footer class ="footer" style="background-color:#f0f0f0;">
 
+
+
+
+
+</div>
+
+</div>
+
+ <br><br><br><br><br><br><br>
+
+ <div class = "footer">
+ <footer class ="footer" style="background-color:#f0f0f0 ;">
   <div class="col-sm-2" style="margin-left:5%; margin-top:3%"> 
     <h5><b>ABOUT US</b></h5>
     <p>Our Company

@@ -10,7 +10,7 @@ if($id == null){
 }else{
 
 $itemid =$_GET["mID"];
-$add = "INSERT INTO `mer_order`(`id`,`order_id`, `user_id`, `item_id`, `amount`) VALUES (null,1,$id,$itemid,1)";
+$add = "INSERT INTO `mer_order`(`id`,`order_id`, `user_id`, `item_id`, `amount`,`status`) VALUES (null,1,$id,$itemid,1,1)";
 $query = mysqli_query($conn,$add);
 echo "<script>window.location='./cart.php';</script>";
 }
