@@ -25,6 +25,10 @@ $countsum = mysqli_fetch_object($countquery);
 $checkinfo = "SELECT * FROM `mer_data` WHERE id = $id";
 $infoquery = mysqli_query($conn,$checkinfo);
 $res = mysqli_fetch_array($infoquery, MYSQLI_ASSOC);
+
+
+
+$sep = rand(0,100000000);
 ?>
  
  <html>
@@ -163,6 +167,7 @@ $res = mysqli_fetch_array($infoquery, MYSQLI_ASSOC);
                         <div class="row">
                             <div class="col-50">
                                 <h3>Billing Address</h3>
+                                    <input type="hidden" name="sep_order" value="<?php echo $sep; ?>">
                                     <label for="fname"><i class="fa fa-user"></i> Full Name</label>
                                     <input type="text" class="form-control" name="fullname" placeholder="Benjamin Velasquez" value="<?php echo $res["fullname"] ?>" required>
                                     <label for="email"><i class="fa fa-envelope"></i> Email</label>

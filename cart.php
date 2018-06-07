@@ -118,7 +118,7 @@ $query = mysqli_query($conn,$sql);
     <tbody>
 
     <?php while($obj = mysqli_fetch_array($query)) {
-  
+     $num_rows = mysqli_num_rows($query);
     ?>
       <tr>
         <td><?php echo $obj['name']?></td>
@@ -154,7 +154,11 @@ $query = mysqli_query($conn,$sql);
   <div style="float:right;">
     <a href="./index.php" class="btn btn-danger"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;&nbsp; Continue Shopping</a>
     &nbsp;&nbsp;&nbsp;
-    <a href="./checkout.php" class="btn btn-success"><span class="glyphicon glyphicon-bitcoin"></span>&nbsp;&nbsp; Proceed to Checkout</a>
+    <?php if($num_rows <= 0){ ?>
+      <a href="#" class="btn btn-success"><span class="glyphicon glyphicon-bitcoin"></span>&nbsp;&nbsp;Let's Grab something before Checkout</a>
+    <?php } else { ?>
+       <a href="./checkout.php" class="btn btn-success"><span class="glyphicon glyphicon-bitcoin"></span>&nbsp;&nbsp; Proceed to Checkout</a>
+    <?php  } ?>
   </div>
 
 </div>

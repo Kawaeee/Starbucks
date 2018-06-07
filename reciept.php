@@ -3,6 +3,7 @@ error_reporting(0);
 ini_set('display_errors', 'On');
 session_start();
 include('connection.php');
+//include('isCheckout.php');
 
 $id = $_SESSION['id'];
 
@@ -11,6 +12,8 @@ if ($_SESSION['id'] == "") {
   echo "<script>window.location='./login.php';</script>";
 }
 
+$sep = $_SESSION['sep_order'];
+
 $strSQL    = "SELECT * FROM mer_user WHERE id  = $id";
 $objQuery  = mysqli_query($conn, $strSQL);
 $objResult = mysqli_fetch_array($objQuery, MYSQLI_ASSOC);
@@ -18,6 +21,10 @@ $objResult = mysqli_fetch_array($objQuery, MYSQLI_ASSOC);
 $sql = "SELECT * FROM `mer_data` WHERE id = $id";
 $query = mysqli_query($conn,$sql);
 $res = mysqli_fetch_array($query, MYSQLI_ASSOC);
+
+$reciept = "SELECT *,mer_order.amount as or_amount FROM `mer_order`,`mer_stock` WHERE user_id = $id AND item_id = mID AND status = 2 AND sep_order = $sep";
+$requery = mysqli_query($conn,$reciept);
+$reresult = mysqli_fetch_array($requery, MYSQLI_ASSOC);
 
 ?>
  
@@ -155,6 +162,8 @@ p.test{
   <br><p align="right" style="padding-right:70px;"class="test">Fake Starbuck Coffee</p>
   <h1>Reciept</h1>
   <br>
+
+  <p align="left" class="test">Order ID : <?php echo $reresult["sep_order"];?></p>
   <p align="left" class="test"><?php echo $res["fullname"];?></p>  
   <p align="left" class="test"><?php echo $res["email"];?></p> 
   <p align="left" class="test"><?php echo $res["address"]; echo "\t"; echo $res["city"]; echo "\t"; echo $res["state"]; echo "\t"; echo $res["zip"];?></p>
@@ -168,17 +177,30 @@ p.test{
     </tr>
   </thead>
   <tbody>
+  <?php 
+
+  $itemquery =mysqli_query($conn,$reciept);
+  while($itemObj = mysqli_fetch_array($itemquery)) { ?>
     <tr>
-      <td><?php echo $obj['name']?></td>
-      <td style="text-align:center;"><?php echo $obj['or_amount']?></td>
-      <td style="text-align:center;"><?php echo $obj['price']?> USD</td>
+      <td><?php echo $itemObj['name']?></td>
+      <td style="text-align:center;"><?php echo $itemObj['or_amount']?></td>
+      <td style="text-align:center;"><?php echo $itemObj['price']?> USD</td>
     </tr>
+
+  <?php } ?>
   </tbody>
 </table>
-<p align="left" style="padding-left:20px;">Total&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-USD</p>
+<p align="left" style="padding-left:10px;">Total&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<?php
+          $sum = "SELECT SUM(mer_stock.price) as total FROM mer_order,mer_user,mer_stock WHERE mer_user.id  = $id AND mer_stock.mID = mer_order.item_id AND status = 2 AND sep_order = $sep";
+          $sumObj = mysqli_fetch_row(mysqli_query($conn, $sum));
+          echo $sumObj[0]." USD"; 
+        ?>
+</p>
+<p>Take a screenshot of this reciept by yourself :x</p>
 
 </div>
 
