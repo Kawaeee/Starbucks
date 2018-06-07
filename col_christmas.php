@@ -99,39 +99,43 @@ $colquery = mysqli_query($conn,$colsql);
       <?php if($id==null){ ?> 
         <li><a href="./login.php"><span class="glyphicon glyphicon-log-in"></span>&nbsp;  Login</a></li>
       <?php }else { ?>
-        <li><a href="./logout.php"><span class="glyphicon glyphicon-log-in"></span>&nbsp; <?php echo $objResult["username"];?></a></li>
+        <li><a href="./logout.php" style="font-weight:bold;"><span class="glyphicon glyphicon-log-in"></span>&nbsp; <?php echo $objResult["username"];?></a></li>
       <?php } ?>
     </ul>
 
   </div>
 </nav>
 
+
+
+
 <div  style="margin-top:-2%; margin-left:0%" class="container"> 
+
 
 <div class="page-header" Style="margin-left:5%; margin-right:5%;" >
     <h3><b>Gift & Merchandise : </b>Christmas Collection</h3> 
 </div>   
 
 
-<ul class="showInColumn2">
+<ul class="showInColumn2" style="width:100%;">
   
   <?php while($obj = mysqli_fetch_array($colquery)) {
   
   ?>
      
     <li>
+    
     <div class="panel panel-default">
-      <div class="panel-heading"><?php echo $obj['name']?></div>
-
+      <div class="panel-heading"><b><?php echo $obj['name']?></div></b>
       <div class="panel-body">
         <div style="text-align:center;">
-          <img src=<?php echo "./img/".$obj['image'] ?> style="width:50%;"  width="150" height="150" alt="Image">
+          <img src=<?php echo "./img/".$obj['image'] ?> style="width:50%;"  width="70" height="140" alt="Image">
           <br>
         </div>
         Description : <?php echo $obj['description']?>
       </div>
 
-      <div class="panel-footer"><?php echo $obj["price"]." USD" ?>
+      <div class="panel-footer"><b><?php echo $obj["price"].".00 USD" ?></b>
       <ul class="nav navbar-nav navbar-right">
       <form method="POST" action="./addtocart.php?mID=<?php echo $obj["mID"]?>">
       <button class="btn btn-link" type="submit" value="Add to Cart" onclick ="alert('Added <?php echo $obj["name"]?> to your cart.')">

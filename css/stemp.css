@@ -18,18 +18,19 @@ ul.showInColumn2{
     display:block;float:left;
     list-style:none;
     padding:0;margin:0;
-    width:1200px; 
-    padding:2px 0 2px 2px;
+    width:100%;
+    padding:2px 0 5px 70px;
 }
 ul.showInColumn2 li{
-    margin-left:8%;
+    margin-left:2%;
     list-style:none;
     display:block;float:left;
+    text-align:center;
     width:300px;
 }
 .container {
     width: 100%;
-    max-width: 1360px;
+    max-width: 2100px;
     margin: 0 auto;
     padding: 0 10px;
     box-sizing: border-box;

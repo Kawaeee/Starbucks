@@ -157,7 +157,7 @@ p.test{
       <?php if($id==null){ ?> 
         <li><a href="./login.php"><span class="glyphicon glyphicon-log-in"></span>&nbsp;  Login</a></li>
       <?php }else { ?>
-        <li><a href="./logout.php"><span class="glyphicon glyphicon-log-in"></span>&nbsp; <?php echo $objResult["username"];?></a></li>
+        <li><a href="./logout.php" style="font-weight:bold;"><span class="glyphicon glyphicon-log-in"></span>&nbsp; <?php echo $objResult["username"];?></a></li>
       <?php } ?>
     </ul>
   </div>

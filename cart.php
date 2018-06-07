@@ -27,7 +27,13 @@ $query = mysqli_query($conn,$sql);
   <link rel="icon" href="./img/icon.png" type="image/png" sizes="16x16">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Barlow">
   <link rel="stylesheet" type="text/css" href="./css/stemp.css">
+ <style>
 
+ .btn-success:hover {
+   background-color:#006341;
+  }
+
+ </style>
 <body  style="font-family: 'Barlow', sans-serif;">
 
 <nav class="navbar navbar-default">
@@ -98,7 +104,7 @@ $query = mysqli_query($conn,$sql);
       <?php if($id==null){ ?> 
         <li><a href="./login.php"><span class="glyphicon glyphicon-log-in"></span>&nbsp;  Login</a></li>
       <?php }else { ?>
-        <li><a href="./logout.php"><span class="glyphicon glyphicon-log-in"></span>&nbsp; <?php echo $objResult["username"];?></a></li>
+        <li><a href="./logout.php" style="font-weight:bold;"><span class="glyphicon glyphicon-log-in"></span>&nbsp; <?php echo $objResult["username"];?></a></li>
       <?php } ?>
     </ul>
     
@@ -126,7 +132,7 @@ $query = mysqli_query($conn,$sql);
       <tr>
         <td><?php echo $obj['name']?></td>
         <td style="text-align:center;"><?php echo $obj['or_amount']?></td>
-        <td style="text-align:center;"><?php echo $obj['price']?> USD</td>
+        <td style="text-align:center;"><?php echo $obj['price']?>.00 USD</td>
         <form method="POST" action="./delete.php?mID=<?php echo $obj["mID"]?>">
         <td style="text-align:center; height: 10%;">
         <button type = "submit" style="" class="btn btn-danger" value="delete" onclick ="alert('Deleted <?php echo $obj["name"]?> from your cart.')"><span class="glyphicon glyphicon-remove-sign"></span>&nbsp;&nbsp;Remove</button>
@@ -145,7 +151,7 @@ $query = mysqli_query($conn,$sql);
         <?php
           $sum = "SELECT SUM(mer_stock.price) as total FROM mer_order,mer_user,mer_stock WHERE mer_user.id  = $id AND mer_stock.mID = mer_order.item_id AND status = 1";
           $sumObj = mysqli_fetch_row(mysqli_query($conn, $sum));
-          echo $sumObj[0]." USD"; 
+          echo $sumObj[0].".00 USD"; 
         ?>
         </td>
         <td></td>

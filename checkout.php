@@ -160,7 +160,7 @@ $sep = rand(0,100000000);
       <?php if($id==null){ ?> 
         <li><a href="./login.php"><span class="glyphicon glyphicon-log-in"></span>&nbsp;  Login</a></li>
       <?php }else { ?>
-        <li><a href="./logout.php"><span class="glyphicon glyphicon-log-in"></span>&nbsp; <?php echo $objResult["username"];?></a></li>
+        <li><a href="./logout.php" style="font-weight:bold;"><span class="glyphicon glyphicon-log-in"></span>&nbsp; <?php echo $objResult["username"];?></a></li>
       <?php } ?>
     </ul>
 
@@ -237,10 +237,10 @@ $sep = rand(0,100000000);
                 <div class="container">
                 <h4>Cart <span class="price" style="color:black"><i class="fa fa-shopping-cart"></i> <b><?php echo $countsum->cart ?></b></span></h4>
                   <?php while($obj = $listre->fetch_array()) { ?>
-                   <p><a href="#"><?php echo $obj['name']?></a> <span class="price"><?php echo $obj['price']?> USD</span></p> 
+                   <p><a href="#"><?php echo $obj['name']?></a> <span class="price"><?php echo $obj['price']?>.00 USD</span></p> 
                   <?php } ?>
                  <hr>  
-                <p>Total <span class="price" style="color:black"><b><?php echo $countsum->total ?> USD</b></span></p>
+                <p> Total <span class="price" style="color:black"><b><?php echo $countsum->total ?>.00 USD</b></span></p>
             </div>
     </div>
 </div>

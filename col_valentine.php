@@ -98,7 +98,7 @@ $colquery = mysqli_query($conn,$colsql);
       <?php if($id==null){ ?> 
         <li><a href="./login.php"><span class="glyphicon glyphicon-log-in"></span>&nbsp;  Login</a></li>
       <?php }else { ?>
-        <li><a href="./logout.php"><span class="glyphicon glyphicon-log-in"></span>&nbsp; <?php echo $objResult["username"];?></a></li>
+        <li><a href="./logout.php" style="font-weight:bold;"><span class="glyphicon glyphicon-log-in"></span>&nbsp; <?php echo $objResult["username"];?></a></li>
       <?php } ?>
     </ul>
 
@@ -120,7 +120,7 @@ $colquery = mysqli_query($conn,$colsql);
      
     <li>
     <div class="panel panel-default">
-      <div class="panel-heading"><?php echo $obj['name']?></div>
+      <div class="panel-heading"><b><?php echo $obj['name']?></b></div>
 
       <div class="panel-body">
         <div style="text-align:center;">
@@ -130,7 +130,7 @@ $colquery = mysqli_query($conn,$colsql);
         Description : <?php echo $obj['description']?>
       </div>
 
-      <div class="panel-footer"><?php echo $obj["price"]." USD" ?>
+      <div class="panel-footer"><b><?php echo $obj["price"].".00 USD" ?></b>
       <ul class="nav navbar-nav navbar-right">
       <form method="POST" action="./addtocart.php?mID=<?php echo $obj["mID"]?>">
       <button class="btn btn-link" type="submit" value="Add to Cart" onclick ="alert('Added <?php echo $obj["name"]?> to your cart.')">
