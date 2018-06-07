@@ -4,9 +4,13 @@ session_start();
 include('connection.php');
 
 $id = $_SESSION['id'];
-$strSQL    = "SELECT * FROM mer_user WHERE id  = $id";
-$objQuery  = mysqli_query($conn, $strSQL);
-$objResult = mysqli_fetch_array($objQuery, MYSQLI_ASSOC);
+
+$strSQL    = "SELECT * FROM mer_user WHERE id  = ?";
+$objQuery  = $conn->prepare($strSQL);
+$objQuery->bind_param("i",$id);
+$objQuery->execute();
+$objre = $objQuery->get_result();
+$objResult = $objre->fetch_array();
 
 $colsql = "SELECT * FROM mer_stock WHERE collection = 'valentine' ";
 $colquery = mysqli_query($conn,$colsql);

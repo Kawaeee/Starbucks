@@ -24,11 +24,10 @@ if (!$objResult) {
     echo "<script>window.location='./login.php';</script>";
 } else {
     $_SESSION["id"]     = $objResult["id"];
-    
     session_write_close();
     echo "<script>alert('Login Successful !!')</script>";
     echo "<script>window.location='./index.php';</script>";
-
 }
 mysqli_close($conn);
+exit();
 ?>

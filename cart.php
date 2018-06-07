@@ -1,17 +1,20 @@
 <?php
 error_reporting(0);
-ini_set('display_errors', 'On');
 include('connection.php');
 session_start();
 
 $id = $_SESSION['id'];
 
-$strSQL    = "SELECT * FROM mer_user WHERE id  = $id";
-$objQuery  = mysqli_query($conn, $strSQL);
-$objResult = mysqli_fetch_array($objQuery, MYSQLI_ASSOC);
+$strSQL    = "SELECT * FROM mer_user WHERE id  = ?";
+$objQuery  = $conn->prepare($strSQL);
+$objQuery->bind_param("i",$id);
+$objQuery->execute();
+$objre = $objQuery->get_result();
+$objResult = $objre->fetch_array();
 
 $sql = "SELECT *,mer_order.amount as or_amount FROM `mer_order`,`mer_stock` WHERE user_id = $id AND item_id = mID AND status = 1";
 $query = mysqli_query($conn,$sql);
+
 ?>
  
  <html>

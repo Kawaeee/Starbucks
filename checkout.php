@@ -11,22 +11,32 @@ if ($_SESSION['id'] == "") {
   echo "<script>window.location='./login.php';</script>";
 }
 
-$strSQL    = "SELECT * FROM mer_user WHERE id  = $id";
-$objQuery  = mysqli_query($conn, $strSQL);
-$objResult = mysqli_fetch_array($objQuery, MYSQLI_ASSOC);
+$strSQL    = "SELECT * FROM mer_user WHERE id  = ?";
+$objQuery  = $conn->prepare($strSQL);
+$objQuery->bind_param("i",$id);
+$objQuery->execute();
+$objre = $objQuery->get_result();
+$objResult = $objre->fetch_array();
 
-$sql = "SELECT *,mer_order.amount as or_amount FROM `mer_order`,`mer_stock` WHERE user_id = $id AND item_id = mID AND status = 1";
-$query = mysqli_query($conn,$sql);
+$list = "SELECT *,mer_order.amount as or_amount FROM `mer_order`,`mer_stock` WHERE user_id = ? AND item_id = mID AND status = 1";
+$listquery = $conn->prepare($list);
+$listquery->bind_param("i",$id);
+$listquery->execute();
+$listre = $listquery->get_result();
 
-$count = "SELECT SUM(mer_stock.price) as total,COUNT(mer_stock.amount) as cart FROM mer_order,mer_user,mer_stock WHERE mer_user.id  = $id AND mer_stock.mID = mer_order.item_id AND status = 1";
-$countquery = mysqli_query($conn,$count);
-$countsum = mysqli_fetch_object($countquery);
+$count = "SELECT SUM(mer_stock.price) as total,COUNT(mer_stock.amount) as cart FROM mer_order,mer_user,mer_stock WHERE mer_user.id  = ? AND mer_stock.mID = mer_order.item_id AND status = 1";
+$countquery = $conn->prepare($count);
+$countquery->bind_param("i",$id);
+$countquery->execute();
+$countre = $countquery->get_result();
+$countsum = $countre->fetch_object();
 
-$checkinfo = "SELECT * FROM `mer_data` WHERE id = $id";
-$infoquery = mysqli_query($conn,$checkinfo);
-$res = mysqli_fetch_array($infoquery, MYSQLI_ASSOC);
-
-
+$checkinfo = "SELECT * FROM `mer_data` WHERE id = ?";
+$infoquery = $conn->prepare($checkinfo);
+$infoquery->bind_param("i",$id);
+$infoquery->execute();
+$infore = $infoquery->get_result();
+$res = $infore->fetch_array();
 
 $sep = rand(0,100000000);
 ?>
@@ -45,25 +55,25 @@ $sep = rand(0,100000000);
 <style>
 
 .row {
-  display: -ms-flexbox; /* IE10 */
+  display: -ms-flexbox; 
   display: flex;
-  -ms-flex-wrap: wrap; /* IE10 */
+  -ms-flex-wrap: wrap;
   flex-wrap: wrap;
   margin: 0 -16px;
 }
 
 .col-25 {
-  -ms-flex: 25%; /* IE10 */
+  -ms-flex: 25%; 
   flex: 25%;
 }
 
 .col-50 {
-  -ms-flex: 50%; /* IE10 */
+  -ms-flex: 50%; 
   flex: 50%;
 }
 
 .col-75 {
-  -ms-flex: 75%; /* IE10 */
+  -ms-flex: 75%; 
   flex: 75%;
 }
 
@@ -226,14 +236,9 @@ $sep = rand(0,100000000);
             <div class="col-25">
                 <div class="container">
                 <h4>Cart <span class="price" style="color:black"><i class="fa fa-shopping-cart"></i> <b><?php echo $countsum->cart ?></b></span></h4>
-                  <?php while($obj = mysqli_fetch_array($query)) {
-  
-                  ?>
-
+                  <?php while($obj = $listre->fetch_array()) { ?>
                    <p><a href="#"><?php echo $obj['name']?></a> <span class="price"><?php echo $obj['price']?> USD</span></p> 
-                  <?php
-                  }
-                  ?>
+                  <?php } ?>
                  <hr>  
                 <p>Total <span class="price" style="color:black"><b><?php echo $countsum->total ?> USD</b></span></p>
             </div>
