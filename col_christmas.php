@@ -28,89 +28,82 @@ $colquery = mysqli_query($conn,$colsql);
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Barlow">
   <link rel="stylesheet" type="text/css" href="./css/stemp.css">
 
-<body  style="font-family: 'Barlow', sans-serif;">
+<body style="font-family: 'Barlow', sans-serif;">
 
 <nav class="navbar navbar-default">
   <div style="min-height: 10px;background: #006341;"></div>
-
-  <div class="container-fluid">
-
-  <br>
-
-  <div class="navbar-header">
-    <form action="./index.php">
-    <input style="margin-left:40%"  type="image" src="./img/icon.png" alt="Submit" width="60" height="60">
-    </form> 
-    
-    </div> 
-    
-
+    <div class="container-fluid">
+      <br>
+      <div class="navbar-header">
+          <form action="./index.php">
+            <input style="margin-left:40%"  type="image" src="./img/icon.png" alt="Submit" width="60" height="60">
+        </form> 
+      </div> 
+  
     <ul  style="margin-left:4%;margin-top:2%" class="nav navbar-nav">
-    <li><a href="#home">Coffee & Tea</a></li>
-    <li><a href="#news">Menu</a></li>
-    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Gift & Merchandise</a>
+      <li><a href="#home">Coffee & Tea</a></li>
+      <li><a href="#news">Menu</a></li>
+      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Gift & Merchandise</a>
         <div class="dropdown-menu">
-        <ul class="showInColumn">
+          <ul class="showInColumn">
 
-          <li><a href="#" style="color:black">
+            <li><a href="#" style="color:black">
               <img src="./img/ABC.png" alt="ABC Collection" style="width:50;height:50;" class="img-responsive center-block">
               ABC Collection
-          </a></li>
+            </a></li>
 
-          <li><a href="#" style="color:black">
+            <li><a href="#" style="color:black">
               <img src="./img/Banana.png" alt="Banana Collection" style="width:50;height:50;" class="img-responsive center-block">
-              Banana Collection
-          </a></li>
+               Banana Collection
+            </a></li>
 
-          <li><a href="#" style="color:black">
+            <li><a href="#" style="color:black">
               <img src="./img/Harvey.png" alt="Harvey Collection" style="width:50;height:50;" class="img-responsive center-block">
               Harvey the Collection
-          </a></li>
+            </a></li>
 
-          <li><a href="./col_christmas.php" style="color:black">
+            <li><a href="./col_christmas.php" style="color:black">
               <img src="./img/Christmas.png" alt="Christmas Collection" style="width:50;height:50;" class="img-responsive center-block">
               Christmas Collection
-          </a></li>
+            </a></li>
 
-          <li><a href="./col_valentine.php" style="color:black">
+            <li><a href="./col_valentine.php" style="color:black">
               <img src="./img/Valentine.png" alt="Valentine Collection" style="width:50;height:50;" class="img-responsive center-block">
               Valentine Collection
-          </a></li>
+            </a></li>
 
-          <li><a href="#" style="color:black">
+            <li><a href="#" style="color:black">
               <img src="./img/Peerapat.png" alt="Peerapat Collection" style="width:50;height:50;" class="img-responsive center-block">
               Peerapat Collection
-          </a></li>
-        </ul>
+            </a></li>
+
+          </ul>
         </div>
       </li>  
-    <li><a href="#about">About us</a></li>
-    <li><a href="#customersupport">Customer Support</a></li>
-    </ul>
-    <form  style="margin-top:-0.5%" class="navbar-form navbar-right">
-      <div class="form-group">
-        <input type="text" class="form-control" placeholder="Search this site">
-      </div>
-      <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
-    </form>
-    <ul  style="margin-top:-1%" class="nav navbar-nav navbar-right">
-      <li><a href="./cart.php"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp; Cart</a></li>
-      <li><a href="#"><span class="glyphicon glyphicon-user"></span>&nbsp; Sign Up</a></li>
-      <?php if($id==null){ ?> 
-        <li><a href="./login.php"><span class="glyphicon glyphicon-log-in"></span>&nbsp;  Login</a></li>
-      <?php }else { ?>
-        <li><a href="./logout.php" style="font-weight:bold;"><span class="glyphicon glyphicon-log-in"></span>&nbsp; <?php echo $objResult["username"];?></a></li>
-      <?php } ?>
-    </ul>
+      <li><a href="#about">About us</a></li>
+      <li><a href="#customersupport">Customer Support</a></li>
+  </ul>
 
+  <form style="margin-top:-0.5%" class="navbar-form navbar-right">
+    <div class="form-group">
+      <input type="text" class="form-control" placeholder="Search this site">
+    </div>
+    <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+  </form>
+
+  <ul style="margin-top:-1%" class="nav navbar-nav navbar-right">
+    <li><a href="./cart.php"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp; Cart</a></li>
+    <li><a href="#"><span class="glyphicon glyphicon-user"></span>&nbsp; Sign Up</a></li>
+    <?php if($id==null){ ?> 
+      <li><a href="./login.php"><span class="glyphicon glyphicon-log-in"></span>&nbsp;  Login</a></li>
+    <?php }else { ?>
+      <li><a href="./logout.php" style="font-weight:bold;"><span class="glyphicon glyphicon-log-in"></span>&nbsp; <?php echo $objResult["username"];?></a></li>
+    <?php } ?>
+  </ul>
   </div>
 </nav>
 
-
-
-
-<div  style="margin-top:-2%; margin-left:0%" class="container"> 
-
+<div style="margin-top:-2%; margin-left:0%" class="container"> 
 
 <div class="page-header" Style="margin-left:5%; margin-right:5%;" >
     <h3><b>Gift & Merchandise : </b>Christmas Collection</h3> 
@@ -119,9 +112,7 @@ $colquery = mysqli_query($conn,$colsql);
 
 <ul class="showInColumn2" style="width:100%;">
   
-  <?php while($obj = mysqli_fetch_array($colquery)) {
-  
-  ?>
+  <?php while($obj = mysqli_fetch_array($colquery)) { ?>
      
     <li>
     
@@ -150,18 +141,15 @@ $colquery = mysqli_query($conn,$colsql);
     </div>
     </li>
 
-    <?php
-    }
-    ?>
-
+    <?php } ?>
 </ul>
-
 </div>
 
 <br>
 
  <div class = "footer">
- <footer class ="footer" style="background-color:#f0f0f0 ;">
+ <footer class ="footer" style="background-color:#f0f0f0;">
+
   <div class="col-sm-2" style="margin-left:5%; margin-top:3%"> 
     <h5><b>ABOUT US</b></h5>
     <p>Our Company

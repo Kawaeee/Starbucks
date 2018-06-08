@@ -109,7 +109,8 @@ $objResult = $objre->fetch_array();
  
  
  <div class = "footer">
- <footer class ="footer" style="background-color:#f0f0f0 ;">
+ <footer class ="footer" style="background-color:#f0f0f0;">
+ 
   <div class="col-sm-2" style="margin-left:5%; margin-top:3%"> 
     <h5><b>ABOUT US</b></h5>
     <p>Our Company

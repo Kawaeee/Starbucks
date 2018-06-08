@@ -7,8 +7,7 @@ $id = $_SESSION['id'];
 if($id == null){
     echo "<script>alert('We need you to access this from login site. Try again !!')</script>";
     echo "<script>window.location='./login.php';</script>";
-}else{
-
+} else {
 $fn = $_POST["fullname"];
 $em = $_POST["email"];
 $ad = $_POST["address"];
@@ -18,7 +17,6 @@ $zp = $_POST["zip"];
 $sep = $_POST["sep_order"];
 
 $_SESSION['sep_order'] = $sep;
-
 
 $check = "SELECT * FROM `mer_data` WHERE id = ? LIMIT 1";
 $checkquery = $conn->prepare($check);
@@ -38,7 +36,6 @@ $order_id = $orderres["order_id"];
 $neworder_id = $orderres["order_id"]+1;
 
 if($checkre->num_rows >= 1){
-
     $update = "UPDATE `mer_data` SET `fullname`= ? ,`email`= ? ,`address`= ? ,`city`= ? ,`state`= ? ,`zip`= ? WHERE id = ? ";
     $updatequery = $conn->prepare($update);
     $updatequery->bind_param("sssssii",$fn,$em,$ad,$ci,$st,$zp,$id);
@@ -50,7 +47,6 @@ if($checkre->num_rows >= 1){
     $itemquery->execute();
 }
 else{
-
     $add = "INSERT INTO `mer_data`(`data_id`, `id`, `fullname`, `email`, `address`, `city`, `state`, `zip`) VALUES (null,?,?,?,?,?,?,?)";
     $addquery = $conn->prepare($add);
     $addquery->bind_param("isssssi",$id,$fn,$em,$ad,$ci,$st,$zp);
@@ -63,9 +59,7 @@ else{
 }
     echo "<script>alert('Checkout complete !!')</script>";
     echo "<script>window.location='./reciept.php';</script>";
-
 }
-//header("location: ./cart.php");
 exit();
 ?>
 

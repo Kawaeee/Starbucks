@@ -18,7 +18,6 @@ $prequery->execute();
 $result = $prequery->get_result();
 $objResult = $result->fetch_array();
 
-
 if (!$objResult) {
     echo "<script>alert('Your username or password are incorrect. Try again !!')</script>";
     echo "<script>window.location='./login.php';</script>";

@@ -14,7 +14,6 @@ $objResult = $objre->fetch_array();
 
 $sql = "SELECT *,mer_order.amount as or_amount FROM `mer_order`,`mer_stock` WHERE user_id = $id AND item_id = mID AND status = 1";
 $query = mysqli_query($conn,$sql);
-
 ?>
  
  <html>
@@ -27,94 +26,91 @@ $query = mysqli_query($conn,$sql);
   <link rel="icon" href="./img/icon.png" type="image/png" sizes="16x16">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Barlow">
   <link rel="stylesheet" type="text/css" href="./css/stemp.css">
- <style>
 
+ <style>
  .btn-success:hover {
    background-color:#006341;
   }
-
  </style>
-<body  style="font-family: 'Barlow', sans-serif;">
+
+<body style="font-family: 'Barlow', sans-serif;">
 
 <nav class="navbar navbar-default">
   <div style="min-height: 10px;background: #006341;"></div>
-
-  <div class="container-fluid">
-
-  <br>
-
-  <div class="navbar-header">
-    <form action="./index.php">
-    <input style="margin-left:40%"  type="image" src="./img/icon.png" alt="Submit" width="60" height="60">
-    </form>   
-  </div> 
-    
-
+    <div class="container-fluid">
+      <br>
+      <div class="navbar-header">
+          <form action="./index.php">
+            <input style="margin-left:40%"  type="image" src="./img/icon.png" alt="Submit" width="60" height="60">
+        </form> 
+      </div> 
+  
     <ul  style="margin-left:4%;margin-top:2%" class="nav navbar-nav">
-    <li><a href="#home">Coffee & Tea</a></li>
-    <li><a href="#news">Menu</a></li>
-    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Gift & Merchandise</a>
+      <li><a href="#home">Coffee & Tea</a></li>
+      <li><a href="#news">Menu</a></li>
+      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Gift & Merchandise</a>
         <div class="dropdown-menu">
-        <ul class="showInColumn">
+          <ul class="showInColumn">
 
-          <li><a href="#" style="color:black">
+            <li><a href="#" style="color:black">
               <img src="./img/ABC.png" alt="ABC Collection" style="width:50;height:50;" class="img-responsive center-block">
               ABC Collection
-          </a></li>
+            </a></li>
 
-          <li><a href="#" style="color:black">
+            <li><a href="#" style="color:black">
               <img src="./img/Banana.png" alt="Banana Collection" style="width:50;height:50;" class="img-responsive center-block">
-              Banana Collection
-          </a></li>
+               Banana Collection
+            </a></li>
 
-          <li><a href="#" style="color:black">
+            <li><a href="#" style="color:black">
               <img src="./img/Harvey.png" alt="Harvey Collection" style="width:50;height:50;" class="img-responsive center-block">
               Harvey the Collection
-          </a></li>
+            </a></li>
 
-          <li><a href="./col_christmas.php" style="color:black">
+            <li><a href="./col_christmas.php" style="color:black">
               <img src="./img/Christmas.png" alt="Christmas Collection" style="width:50;height:50;" class="img-responsive center-block">
               Christmas Collection
-          </a></li>
+            </a></li>
 
-          <li><a href="./col_valentine.php" style="color:black">
+            <li><a href="./col_valentine.php" style="color:black">
               <img src="./img/Valentine.png" alt="Valentine Collection" style="width:50;height:50;" class="img-responsive center-block">
               Valentine Collection
-          </a></li>
+            </a></li>
 
-          <li><a href="#" style="color:black">
+            <li><a href="#" style="color:black">
               <img src="./img/Peerapat.png" alt="Peerapat Collection" style="width:50;height:50;" class="img-responsive center-block">
               Peerapat Collection
-          </a></li>
-        </ul>
+            </a></li>
+            
+          </ul>
         </div>
       </li>  
-    <li><a href="#about">About us</a></li>
-    <li><a href="#customersupport">Customer Support</a></li>
-    </ul>
-    <form  style="margin-top:-0.5%" class="navbar-form navbar-right">
-      <div class="form-group">
-        <input type="text" class="form-control" placeholder="Search this site">
-      </div>
-      <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
-    </form>
-    <ul  style="margin-top:-1%" class="nav navbar-nav navbar-right">
-      <li><a href="./cart.php"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp; Cart</a></li>
-      <li><a href="#"><span class="glyphicon glyphicon-user"></span>&nbsp; Sign Up</a></li>
-      <?php if($id==null){ ?> 
-        <li><a href="./login.php"><span class="glyphicon glyphicon-log-in"></span>&nbsp;  Login</a></li>
-      <?php }else { ?>
-        <li><a href="./logout.php" style="font-weight:bold;"><span class="glyphicon glyphicon-log-in"></span>&nbsp; <?php echo $objResult["username"];?></a></li>
-      <?php } ?>
-    </ul>
-    
+      <li><a href="#about">About us</a></li>
+      <li><a href="#customersupport">Customer Support</a></li>
+  </ul>
+
+  <form style="margin-top:-0.5%" class="navbar-form navbar-right">
+    <div class="form-group">
+      <input type="text" class="form-control" placeholder="Search this site">
+    </div>
+    <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+  </form>
+
+  <ul style="margin-top:-1%" class="nav navbar-nav navbar-right">
+    <li><a href="./cart.php"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp; Cart</a></li>
+    <li><a href="#"><span class="glyphicon glyphicon-user"></span>&nbsp; Sign Up</a></li>
+    <?php if($id==null){ ?> 
+      <li><a href="./login.php"><span class="glyphicon glyphicon-log-in"></span>&nbsp;  Login</a></li>
+    <?php }else { ?>
+      <li><a href="./logout.php" style="font-weight:bold;"><span class="glyphicon glyphicon-log-in"></span>&nbsp; <?php echo $objResult["username"];?></a></li>
+    <?php } ?>
+  </ul>
   </div>
 </nav>
 
 <br>
 
-<div class="container" style="width:80%; margin-left:140px;" > 
-
+<div class="container" style="width:80%; margin-left:140px;"> 
   <table class="table table-hover">
     <thead> 
       <tr>
@@ -124,8 +120,8 @@ $query = mysqli_query($conn,$sql);
         <th style="text-align:center;">Action</th>
       </tr>
     </thead>
-    <tbody>
 
+    <tbody>
     <?php while($obj = mysqli_fetch_array($query)) {
      $num_rows = mysqli_num_rows($query);
     ?>
@@ -134,15 +130,13 @@ $query = mysqli_query($conn,$sql);
         <td style="text-align:center;"><?php echo $obj['or_amount']?></td>
         <td style="text-align:center;"><?php echo $obj['price']?>.00 USD</td>
         <form method="POST" action="./delete.php?mID=<?php echo $obj["mID"]?>">
-        <td style="text-align:center; height: 10%;">
-        <button type = "submit" style="" class="btn btn-danger" value="delete" onclick ="alert('Deleted <?php echo $obj["name"]?> from your cart.')"><span class="glyphicon glyphicon-remove-sign"></span>&nbsp;&nbsp;Remove</button>
-        </td>
+          <td style="text-align:center; height: 10%;">
+            <button type = "submit" style="" class="btn btn-danger" value="delete" onclick ="alert('Deleted <?php echo $obj["name"]?> from your cart.')"><span class="glyphicon glyphicon-remove-sign"></span>&nbsp;&nbsp;Remove</button>
+          </td>
         </form>
       </tr>
 
-      <?php
-           }
-      ?>
+    <?php } ?>
 
       <tr>
         <td><h4>Total</h4></td>
